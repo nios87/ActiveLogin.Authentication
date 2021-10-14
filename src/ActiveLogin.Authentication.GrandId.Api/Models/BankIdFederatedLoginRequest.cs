@@ -2,7 +2,7 @@
 {
     public class BankIdFederatedLoginRequest
     {
-        public BankIdFederatedLoginRequest(string? callbackUrl = null, bool? useChooseDevice = null, bool? useSameDevice = null, bool? askForPersonalIdentityNumber = null, string? personalIdentityNumber = null, bool? requireMobileBankId = null, string? customerUrl = null, bool? showGui = null, string? signUserVisibleData = null, string? signUserNonVisibleData = null)
+        public BankIdFederatedLoginRequest(string? callbackUrl = null, bool? useChooseDevice = null, bool? useSameDevice = null, bool? askForPersonalIdentityNumber = null, string? personalIdentityNumber = null, bool? requireMobileBankId = null, string? customerUrl = null, bool? showGui = null, string? signUserVisibleData = null, string? signUserNonVisibleData = null, string? appRedirect = null)
         {
             CallbackUrl = callbackUrl;
             UseChooseDevice = useChooseDevice;
@@ -14,6 +14,7 @@
             ShowGui = showGui;
             SignUserVisibleData = signUserVisibleData;
             SignUserNonVisibleData = signUserNonVisibleData;
+            AppRedirect = appRedirect;
         }
 
         /// <summary>
@@ -68,5 +69,16 @@
         /// If not set, the value in userVisibleData is copied.
         /// </summary>
         public string? SignUserNonVisibleData { get; }
+
+        /// <summary>
+        /// The appRedirect parameter gets sent to the BankID application as the redirect parameter.
+        /// This can be used to either forcibly stop or automate the flow after the user identifies in the BankID application.
+        /// These are some of the recommendation for using the appRedirect parameter with different operating systems.
+        /// With Android devices you rarely, if ever, need to pass anything to the appRedirect parameter. If you need to pass any value here it might be the string null.
+        /// For iOS devices you have two options.
+        /// Option 1: Pass the string null, this will halt the flow after the user identifies in the BankID application. After this the user needs to manually navigate back to the correct application. Either by clicking the top-left corner to go back, or by minimizing the BankID application.
+        /// Option 2: Pass a URL with a custom scheme to instruct BankID to try to context switch to that application. For example myapp://redirect.
+        /// </summary>
+        public string? AppRedirect { get; }
     }
 }

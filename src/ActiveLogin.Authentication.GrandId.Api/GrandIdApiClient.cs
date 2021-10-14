@@ -55,7 +55,8 @@ namespace ActiveLogin.Authentication.GrandId.Api
                 { "customerURL", GetBase64EncodedString(request.CustomerUrl) },
                 { "gui", GetBoolString(request.ShowGui) },
                 { "userVisibleData", GetBase64EncodedString(request.SignUserVisibleData) },
-                { "userNonVisibleData", GetBase64EncodedString(request.SignUserNonVisibleData) }
+                { "userNonVisibleData", GetBase64EncodedString(request.SignUserNonVisibleData) },
+                { "appRedirect", System.Net.WebUtility.UrlEncode(request.AppRedirect) },
             };
 
             var fullResponse = await PostFullResponseAndEnsureSuccess<BankIdFederatedLoginFullResponse>(url, postData);
